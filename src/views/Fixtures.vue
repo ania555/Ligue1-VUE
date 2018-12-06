@@ -4,8 +4,19 @@
       <p>loading</p>
     </div>
     <div v-else>
-      <div v-for="match in allMatches">
-        <h3>{{ dayDate(match) }}</h3> 
+      <p></p>
+      <div>
+        <select v-model="selected">
+          <option > </option>
+          <option v-for="oneday in matchDayOptions">{{ oneday }}</option>
+        </select>  
+        <select v-model="selectedTeam">
+          <option > </option>
+          <option v-for="team in fixtBadge">{{ team.name }}</option>
+        </select>  
+      </div>
+      <div v-for="match in matchDays">
+        <h3 v-show="timeHeader(match)">{{ dayDate(match) }}</h3> 
         <table class="table">
           <tbody>
             <tr>
@@ -39,7 +50,7 @@ import Game from '@/components/Game.vue'
 import moment from 'moment'
 
 export default {
-    name: 'fixtures',
+  name: 'fixtures',
   components: {
     Game,
   },
@@ -50,7 +61,8 @@ export default {
       allMatches: [],
       fruit: "orange",
       fixtBadge: [],
-      i: 1,
+      selected: '',
+      selectedTeam: '',
     }
   },
    mounted() {
@@ -84,6 +96,49 @@ export default {
                     console.log("Request failed: " + error.message)
                 })
   },
+  computed: {
+     matchDayOptions() {
+       let allOptions = [];
+       allOptions.push(this.allMatches[0].matchday);
+       for (let i = 1; i < this.allMatches.length; i++) {
+         if (this.allMatches[i].matchday !== this.allMatches[i -1].matchday) {
+           allOptions.push(this.allMatches[i].matchday);
+         }
+       }
+       return allOptions; 
+     },
+    //  toDay() {
+    //    let currentDay = this.allMatches[0].season.currentMatchday;
+    //    return currentDay;
+    //  },
+     matchDays() {
+       console.log(this.selected); 
+       console.log(this.selectedTeam);
+       let currentDay = this.allMatches[0].season.currentMatchday; 
+        if (this.selected == '' && this.selectedTeam == '') {
+          return this.allMatches.filter((match) => {
+                    return match.matchday == currentDay;
+                })
+        }
+        else if (this.selected != '' && this.selectedTeam == '') {
+          return this.allMatches.filter((match) => {
+                    return match.matchday == this.selected;
+                })
+        } 
+         else if (this.selected == '' && this.selectedTeam != '') {
+          return this.allMatches.filter((match) => {
+                    if (match.homeTeam.name == this.selectedTeam || match.awayTeam.name == this.selectedTeam)
+                    return match;
+                })   
+        }
+        else if (this.selected != '' && this.selectedTeam != '') {
+          return this.allMatches.filter((match) => {
+                    if (match.homeTeam.name == this.selectedTeam || match.awayTeam.name == this.selectedTeam)
+                    return match;
+                }) 
+     }
+    }
+  },
   methods: {
     dayDate(date) {
       let myDay = moment(date.utcDate).format("dddd D MMMM YYYY [|] HH:mm").toUpperCase();
@@ -111,8 +166,19 @@ export default {
         return this.fixtBadge[i].venue.toUpperCase();
       } 
     },
+    timeHeader(item) {
+      for (let i = 0; i < this.allMatches.length; i++) {
+        if ( item === this.allMatches[0]) 
+          return true;
+        else if ( this.allMatches[i] === item && this.allMatches[i].utcDate === this.allMatches[i-1].utcDate) 
+          return false;
+        else if ( this.allMatches[i] === item && this.allMatches[i].utcDate !== this.allMatches[i-1].utcDate) 
+          return true;
+      }
+    },
   }
 }
+
 </script>
 
 
