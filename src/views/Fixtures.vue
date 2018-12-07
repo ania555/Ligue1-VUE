@@ -14,9 +14,9 @@
           <option > </option>
           <option v-for="team in fixtBadge">{{ team.name }}</option>
         </select>  
-      </div>
+      </div><br>
       <div v-for="match in matchDays">
-        <h3 v-show="timeHeader(match)">{{ dayDate(match) }}</h3> 
+        <h5 v-show="timeHeader(match)">{{ dayDate(match) }}</h5> 
         <table class="table">
           <tbody>
             <tr>
@@ -167,13 +167,20 @@ export default {
       } 
     },
     timeHeader(item) {
-      for (let i = 0; i < this.allMatches.length; i++) {
-        if ( item === this.allMatches[0]) 
+      if (this.selectedTeam == '') {
+        for (let i = 0; i < this.allMatches.length; i++) {
+          if ( item === this.allMatches[0]) 
+            return true;
+          else if ( this.allMatches[i] === item && this.allMatches[i].utcDate === this.allMatches[i-1].utcDate) 
+           return false;
+          else if ( this.allMatches[i] === item && this.allMatches[i].utcDate !== this.allMatches[i-1].utcDate) 
+            return true;
+        }
+      } 
+      else if (this.selectedTeam != '') {
+        for (let i = 0; i < this.allMatches.length; i++) {
           return true;
-        else if ( this.allMatches[i] === item && this.allMatches[i].utcDate === this.allMatches[i-1].utcDate) 
-          return false;
-        else if ( this.allMatches[i] === item && this.allMatches[i].utcDate !== this.allMatches[i-1].utcDate) 
-          return true;
+        }
       }
     },
   }

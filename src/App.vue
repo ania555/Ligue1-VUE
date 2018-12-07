@@ -12,7 +12,7 @@
 
       <!-- <router-link to="/">Home</router-link> | -->
       <!-- <router-link to="/fixtures">Fixtures</router-link> |
-      <router-link to="/table">Table</router-link> |
+      <router-link to="/standings">Standings</router-link> |
       <router-link to="/teams">Teams</router-link>  -->
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -24,7 +24,7 @@
           <router-link class="nav-link" :to="{ name: 'fixtures', params:{ teamsforSchedule: this.teamLogos}} ">Schedule</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/table">Table</router-link>
+          <router-link class="nav-link" :to="{ name: 'standings', params:{ teamsForStandings: this.teamLogos}}">Standings</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" :to="{ name: 'teams', params:{ teamsForTeams: this.teamLogos}}">Teams</router-link>
@@ -62,7 +62,7 @@
 
 import Home from './views/Home.vue'
 import Fixtures from './views/Fixtures.vue'
-import Table from './views/Table.vue'
+import Standings from './views/Standings.vue'
 import Teams from './views/Teams.vue'
 
 export default {
@@ -70,7 +70,7 @@ export default {
   components: {
     Home,
     Fixtures,
-    Table,
+    Standings,
     Teams,
   },
   data() {

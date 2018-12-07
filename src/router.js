@@ -20,9 +20,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "fixtures" */ './views/Fixtures.vue')
     },
     {
-      path: '/table',
-      name: 'table',
-      component: () => import(/* webpackChunkName: "table" */ './views/Table.vue')
+      path: '/standings',
+      name: 'standings',
+      component: () => import(/* webpackChunkName: "standings" */ './views/Standings.vue')
     },
     {
       path: '/teams',
