@@ -4,16 +4,8 @@
       <p>loading</p>
     </div>
     <div v-else>
-
-    <p>{{ teamsFr[0] }}</p>
-    <p>{{ teamsFr[0].crestUrl }}</p>
-    <div v-for=" team in teamBadge">
-      <p> {{ team.name }}</p>
-      <img :src="team.crestUrl" alt="">
+  
     </div>
-    </div>
-    
-    <h1>This is an about page</h1>
   </div>
 </template>
 
@@ -73,4 +65,5 @@ export default {
 img {
    height: 70px;
 }
+
 </style>

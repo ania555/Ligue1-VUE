@@ -4,20 +4,20 @@
       <p>loading</p>
     </div>
     <div v-else>
-      <p></p>
+      <div class="container">
       <div>
-        <select v-model="selected">
-          <option > </option>
-          <option v-for="oneday in matchDayOptions">{{ oneday }}</option>
-        </select>  
-        <select v-model="selectedTeam">
-          <option > </option>
-          <option v-for="team in fixtBadge">{{ team.name }}</option>
-        </select>  
-      </div><br>
-      <div v-for="match in matchDays">
-        <h5 v-show="timeHeader(match)">{{ dayDate(match) }}</h5> 
-        <table class="table">
+        <b-form-select v-model="selected">
+          <option>Select day</option>
+          <option v-for="(oneday, i) in matchDayOptions" :key="i">{{ oneday }}</option>
+        </b-form-select>  
+        <b-form-select v-model="selectedTeam">
+          <option>Select team</option>
+          <option v-for="(team, i) in fixtBadge" :key="i">{{ team.name }}</option>
+        </b-form-select>  
+      </div>
+      <div v-for="(match, i) in matchDays" :key="i">
+        <h6 v-show="timeHeader(match)"><strong>{{ dayDate(match) }}</strong></h6> 
+        <table class="">
           <tbody>
             <tr>
               <td>
@@ -37,9 +37,8 @@
           </tbody>
         </table>
       </div>
-    
     </div>
-    <!-- <game :allMatches="matchesFr" :myfruit="fruit" :gameBadges="fixtBadge"/> -->
+    </div>
   </div>
 </template>
 
@@ -61,8 +60,8 @@ export default {
       allMatches: [],
       fruit: "orange",
       fixtBadge: [],
-      selected: '',
-      selectedTeam: '',
+      selected: 'Select day',
+      selectedTeam: 'Select team',
     }
   },
    mounted() {
@@ -115,23 +114,24 @@ export default {
        console.log(this.selected); 
        console.log(this.selectedTeam);
        let currentDay = this.allMatches[0].season.currentMatchday; 
-        if (this.selected == '' && this.selectedTeam == '') {
+       console.log(currentDay);
+        if (this.selected == 'Select day' && this.selectedTeam == 'Select team') {
           return this.allMatches.filter((match) => {
                     return match.matchday == currentDay;
                 })
         }
-        else if (this.selected != '' && this.selectedTeam == '') {
+        else if (this.selected != 'Select day' && this.selectedTeam == 'Select team') {
           return this.allMatches.filter((match) => {
                     return match.matchday == this.selected;
                 })
         } 
-         else if (this.selected == '' && this.selectedTeam != '') {
+         else if (this.selected == 'Select day' && this.selectedTeam != 'Select team') {
           return this.allMatches.filter((match) => {
                     if (match.homeTeam.name == this.selectedTeam || match.awayTeam.name == this.selectedTeam)
                     return match;
                 })   
         }
-        else if (this.selected != '' && this.selectedTeam != '') {
+        else if (this.selected != 'Select day' && this.selectedTeam != 'Select team') {
           return this.allMatches.filter((match) => {
                     if (match.homeTeam.name == this.selectedTeam || match.awayTeam.name == this.selectedTeam)
                     return match;
@@ -192,7 +192,54 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-img {
-   height: 70px;
+.fixtures {
+  background-color: rgb(245, 250, 220);
 }
+
+select {
+  height: 35px;
+  width: 120px;
+  border-radius: 10px;
+  font-stretch: extra-condensed;
+  padding-left: 15px;
+   margin: 15px 0px 25px 0px;
+}
+img {
+   height: 50px;
+}
+table {
+  position: relative; 
+  font-size: 12px;
+  background-color: rgb(245, 250, 220);
+}
+
+td, th {
+  border-top: 1px solid #ccc;
+  padding: 5px;
+  width: 300px;
+}
+td {
+  height: 40px;
+  background-color: rgb(245, 250, 220);
+}
+
+thead th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  background: #000;
+  color: #FFF;
+}
+
+tbody th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 0;
+  background: #FFF;
+  width: 40px;
+  height: 40px;
+  padding-left: 6.5px;
+  padding-right: 6.5px;
+}
+
 </style>

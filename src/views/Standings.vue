@@ -4,63 +4,51 @@
       <p>loading</p>
     </div>
     <div v-else>
-      <div>
-        <p>{{ picked }}</p>
+       <div>
+        <b-form-select v-model="picked">
+           <option>GENERAL</option>
+           <option>HOME</option>
+            <option>AWAY</option>
+        </b-form-select>  
       </div>
+    <div class="standingsContainer"> 
       <div>
-        <form class="chooseSandings">
-          <span>
-            <input type="radio" v-model="picked" id="gSt" value="generalSt">
-            <label :class="pickButton('generalSt')" for="gSt">GENERAL</label>
-          </span>
-          <span>
-            <input type="radio" v-model="picked" id="hSt" value="homeSt">
-           <label :class="pickButton('homeSt')" for="hSt">HOME</label>
-          </span>
-          <span>
-            <input type="radio" v-model="picked" id="aSt" value="awaySt">
-            <label :class="pickButton('awaySt')" for="aSt">AWAY</label>
-          </span>      
-        </form>
-      </div>
-      <div>
-        <table class="table">
+      <div class="scrollMe">   
+        <table>
           <thead>
             <tr>
               <th></th>
-              <th><span></span></th>
-              <th><span></span></th>
-              <th>TEAM</th>
-              <th>PLAYED</th>
-              <th>WINS</th>
-              <th>DRAWS</th>
-              <th>LOSES</th>
-              <th>FOR</th>
-              <th>AGAINST</th>
-              <th></th>
-              <th>POINTS</th>
+              <th class="fixHead2"></th>
+              <th class="fixHead3">TEAM</th>
+              <th class="fixHead4">PTS</th>
+              <th>PLD</th>
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>F</th>
+              <th>A</th>
+              <th>GD</th>
             </tr>
           </thead>
-          <tbody v-for="standing in pickedStanding">
+          <tbody v-for="(standing, i) in pickedStanding" :key="i">
             <tr>
-              <td :class="colorPos(standing.position)">{{ standing.position }}</td>
-              <td><span></span></td>
-              <td><img :src="myBadge(standing)" alt=""></td>
-              <td>{{ standing.team.name }}</td>
-              <td>{{ standing.playedGames }}</td>
-              <td>{{ standing.won }}</td>
-              <td>{{ standing.draw }}</td>
-              <td>{{ standing.lost }}</td>
-              <td>{{ standing.goalsFor }}</td>
-              <td>{{ standing.goalsAgainst }}</td>
-              <td>{{ standing.goalDifference }}</td>
-              <td>{{ standing.points }}</td>
+              <th :class="colorPos(standing.position)">{{ standing.position }}</th>
+              <td class="fixColumn2"><img :src="myBadge(standing)" alt=""></td>
+              <td class="fixColumn3">{{ standing.team.name }}</td>
+              <td class="fixColumn4"><strong>{{ standing.points }}</strong></td>
+              <td class="slimTd">{{ standing.playedGames }}</td>
+              <td class="slimTd">{{ standing.won }}</td>
+              <td class="slimTd">{{ standing.draw }}</td>
+              <td class="slimTd">{{ standing.lost }}</td>
+              <td class="slimTd">{{ standing.goalsFor }}</td>
+              <td class="slimTd">{{ standing.goalsAgainst }}</td>
+              <td class="slimTd">{{ standing.goalDifference }}</td>  
             </tr>
           </tbody>
         </table>
       </div>
-
-
+      </div>
+    </div> 
     </div>
   </div>
 </template>
@@ -80,7 +68,8 @@ export default {
       standingsFr: [],
       fruit: "apple",
       standBadge: [],
-      picked: "generalSt",
+      picked: "GENERAL",
+      selected: null,
     }
   },
    mounted() {
@@ -117,13 +106,13 @@ export default {
   computed: {
     pickedStanding() {
       console.log(this.picked);
-      if (this.picked == "generalSt") {
+      if (this.picked == "GENERAL") {
         return this.standingsFr[0].table
       }
-      else if (this.picked == "homeSt") {
+      else if (this.picked == "HOME") {
          return this.standingsFr[1].table
       }
-      else if (this.picked == "awaySt") {
+      else if (this.picked == "AWAY") {
          return this.standingsFr[2].table
       }
     }
@@ -161,36 +150,28 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+.standings {
+  background-color: rgb(245, 250, 220);
+}
+
+select {
+  height: 35px;
+  width: 120px;
+  border-radius: 10px;
+  font-stretch: extra-condensed;
+  padding-left: 15px;
+  margin: 10px 0px 10px 0px;
+}
+.standingsContainer {
+  margin: 0px 3px 0px 3px;
+}
+
 img {
-   height: 35px;
+   height: 40px;
+   padding-left: 5px;
+   padding-right: 5px;
 }
-.up {
-    border: 6px transparent solid;
-    content: "";
-    width: 0;
-    height: 0;
-    border-bottom-color: #009000;
-    display: inline-block;
-    margin-bottom: 4px;
-}
-.down {
-    border: 6px transparent solid;
-    content: "";
-    width: 0;
-    height: 0;
-    border-top-color: #C80A00;
-    display: inline-block;
-    margin-bottom: -2px;
-}
-.stable {
-    border: 6px transparent solid;
-    content: "";
-    width: 0;
-    height: 0;
-    border-left-color: rgb(49, 20, 177);
-    display: inline-block;
-    margin-bottom: 0px;
-}
+
 .boxGreen {
   background-color: rgb(5, 185, 5);
   color: white;
@@ -208,70 +189,99 @@ img {
   color: white;
 }
 
-/* .chooseSandings span {
-    width: 100px;
-    height: 40px; 
-    background-color: blue;
-    color: white;
-    margin-left: 20px;
-}
-.chooseSandings input [type="radio"] {
-    opacity: 0.01;
-    z-index: 100;
-} */
 
-
-
-
-.chooseSandings {
-  margin:25px 0 0 0;
-  padding:0;
-}
-
-.chooseSandings span {
-  float: right;  
-  margin: 0 30px 0 0;
-  width: 100px;
-  height: 40px;
+.scrollMe {
+  max-width: 100%;
+  max-height: 700px;
+  overflow: scroll;
   position: relative;
-
-
+}
+table {
+  position: relative; 
+  font-size: 14px;
+  background-color: rgb(245, 250, 220);
 }
 
-.chooseSandings label, .chooseSandings input {
-  display: block;
-  position: absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-}
-
-.chooseSandings input [type="radio"] {
-  opacity: 0.01;
-  z-index: 100;
-}
-
-/* .chooseSandings input [type="radio"]:checked + label {
-  background: rgb(134, 134, 250);
-} */
-
-.chooseSandings label {
+td, th {
+  border-top: 1px solid #ccc;
   padding: 5px;
-  border: 1px solid #CCC;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  z-index: 90;
+  width: 300px;
+}
+td {
+  height: 40px;
+  background-color: rgb(245, 250, 220);
+}
+.slimTd {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.chooseSandings label:hover {
-  background: rgb(120, 120, 180);
+thead th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  background: #000;
+  color: #FFF;
 }
-.pickedButton {
-  background: rgb(120, 120, 180);
+thead th:first-child {
+  left: 0;
+  z-index: 1;
+  width: 40px;
 }
-.freeButton {
-  background: rgb(13, 13, 71);
+.fixHead2 {
+  left: 30px;
+  z-index: 1;
+  width: 100px;
+}
+.fixColumn2 {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 30px;
+  background-color: rgb(245, 250, 220);
+  width: 100px;
+}
+.fixHead3 {
+  left: 90px;
+  z-index: 1;
+  padding-left: 60px;
+  padding-right: 60px;
+  width: 700px;
+}
+.fixColumn3 {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 90px;
+  background: #FFF;
+  border-right: 1px solid #CCC;
+  padding-left: 1px;
+  padding-right: 5px;
+  width: 700px;
+  background-color: rgb(245, 250, 220);
+}
+.fixHead4 {
+  left: 249px;
+  z-index: 1;
+  width: 50px;
+}
+.fixColumn4 {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 249px;
+  background: #FFF;
+  border-left: 1px solid #CCC;
+  background-color: rgb(245, 250, 220);
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 50px;
+}
+tbody th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 0;
+  background: #FFF;
+  width: 40px;
+  height: 40px;
+  padding-left: 6.5px;
+  padding-right: 6.5px;
 }
 </style>

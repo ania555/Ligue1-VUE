@@ -3,50 +3,28 @@
     <!-- <div v-if="isLoading">
       <p>loading</p>
     </div> -->
-    <div>   
-    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
-      <router-link class="navbar-brand" to="/">Home</router-link>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
+    <div>
+      <b-navbar toggleable="md" type="dark" variant="secondary">
+        <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+        <img src="" alt="">
+        
+        <b-navbar-brand href="#">LIGUE 1</b-navbar-brand>
+        <img src="./assets/logo_ligue1.jpeg" alt="">
+          <b-collapse is-nav id="nav_collapse">
+            <b-navbar-nav>
+              <router-link class="nav-link" to="/">Home</router-link>
+              <router-link class="nav-link" :to="{ name: 'fixtures', params:{ teamsforSchedule: this.teamLogos}} ">Schedule</router-link>
+              <router-link class="nav-link" :to="{ name: 'standings', params:{ teamsForStandings: this.teamLogos}}">Standings</router-link>
+              <router-link class="nav-link" :to="{ name: 'teams', params:{ teamsForTeams: this.teamLogos}}">Teams</router-link>
+              <b-nav-item href="#">Link</b-nav-item>
+            </b-navbar-nav>
+          </b-collapse>
+      </b-navbar>
+    </div>
       <!-- <router-link to="/">Home</router-link> | -->
       <!-- <router-link to="/fixtures">Fixtures</router-link> |
       <router-link to="/standings">Standings</router-link> |
       <router-link to="/teams">Teams</router-link>  -->
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'fixtures', params:{ teamsforSchedule: this.teamLogos}} ">Schedule</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'standings', params:{ teamsForStandings: this.teamLogos}}">Standings</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'teams', params:{ teamsForTeams: this.teamLogos}}">Teams</router-link>
-        </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-   </div>
-  </nav>
-</div>
-
-
   <div>
     <router-view/>
   </div>
@@ -129,5 +107,9 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+img {
+  height: 70px;
+  
 }
 </style>
