@@ -16,22 +16,23 @@
         </b-form-select>  
       </div>
       <div v-for="(match, i) in matchDays" :key="i">
-        <h6 v-show="timeHeader(match)"><strong>{{ dayDate(match) }}</strong></h6> 
+        <div class="timeContainer">
+            <h6 v-show="timeHeader(match)"><strong>{{ dayDate(match) }}</strong></h6>  
+        </div>
         <table class="">
           <tbody>
             <tr>
-              <td>
+              <td class="teamContainer">
                 <img :src="myHomeBadge(match)" alt="">
-                <p>{{ match.homeTeam.name.toUpperCase() }}</p>
+                <p>{{ myHomeTeam(match) }}</p>
               </td>
-              <td>
-                <br>
-                <p>{{ match.score.fullTime.homeTeam }}:{{ match.score.fullTime.awayTeam }}</p>
-                <p>{{ myVenue(match) }}</p>
-                </td>
-              <td>
+              <td class="scoreTd">
+                <p class="myScore"><strong>{{ match.score.fullTime.homeTeam }} - {{ match.score.fullTime.awayTeam }}</strong></p>
+                <p class="venue">{{ myVenue(match) }}</p>
+              </td>
+              <td class="teamContainer">
                 <img :src="myAwayBadge(match)" alt="">
-                <p>{{ match.awayTeam.name.toUpperCase() }}</p>
+                <p>{{ myAwayTeam(match) }}</p>
               </td>
             </tr>
           </tbody>
@@ -148,6 +149,18 @@ export default {
       let myTime = moment(date).format("HH:mm");
       return myTime; 
     },
+    myHomeTeam(item) {
+      for (let i = 0; i < this.fixtBadge.length; i++) {
+        if(this.fixtBadge[i].id === item.homeTeam.id) 
+        return this.fixtBadge[i].shortName.toUpperCase();
+      }
+    },
+    myAwayTeam(item) {
+      for (let i = 0; i < this.fixtBadge.length; i++) {
+        if(this.fixtBadge[i].id === item.awayTeam.id) 
+        return this.fixtBadge[i].shortName.toUpperCase();
+      } 
+    },
     myHomeBadge(item) {
       for (let i = 0; i < this.fixtBadge.length; i++) {
         if(this.fixtBadge[i].id === item.homeTeam.id) 
@@ -167,7 +180,7 @@ export default {
       } 
     },
     timeHeader(item) {
-      if (this.selectedTeam == '') {
+      if (this.selectedTeam == 'Select team') {
         for (let i = 0; i < this.allMatches.length; i++) {
           if ( item === this.allMatches[0]) 
             return true;
@@ -177,7 +190,7 @@ export default {
             return true;
         }
       } 
-      else if (this.selectedTeam != '') {
+      else if (this.selectedTeam != 'Select team') {
         for (let i = 0; i < this.allMatches.length; i++) {
           return true;
         }
@@ -192,54 +205,61 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+@media only screen and (orientation: portrait) {
+ .venue {
+    display: none;
+  }
+}
 .fixtures {
   background-color: rgb(245, 250, 220);
 }
-
 select {
   height: 35px;
   width: 120px;
   border-radius: 10px;
   font-stretch: extra-condensed;
   padding-left: 15px;
-   margin: 15px 0px 25px 0px;
+  margin: 15px 0px 25px 0px;
+}
+.timeContainer {
+  display: flex;
+  justify-content: center;
+}
+h6 {
+  position: relative;
+  font-stretch: extra-condensed; 
+  top: 16px;
+  background-color: rgb(245, 250, 220);
+  padding: 0px 5px 0px 5px;
 }
 img {
-   height: 50px;
+   height: 60px;
+   width: 60px;
+   padding: 5px;
 }
-table {
-  position: relative; 
-  font-size: 12px;
+table { 
+  width: 100%;
+  font-size: 10px;
+  font-stretch: condensed;
   background-color: rgb(245, 250, 220);
-}
-
-td, th {
-  border-top: 1px solid #ccc;
-  padding: 5px;
-  width: 300px;
 }
 td {
-  height: 40px;
   background-color: rgb(245, 250, 220);
+  border-top: 1px solid #ccc;
+  padding: 20px 0px 0px 0px
 }
-
-thead th {
-  position: -webkit-sticky; /* for Safari */
-  position: sticky;
-  top: 0;
-  background: #000;
-  color: #FFF;
+.teamContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 130px;
+  font-size: 13px;
 }
-
-tbody th {
-  position: -webkit-sticky; /* for Safari */
-  position: sticky;
-  left: 0;
-  background: #FFF;
-  width: 40px;
-  height: 40px;
-  padding-left: 6.5px;
-  padding-right: 6.5px;
+.scoreTd {
+  max-width: 100px;
+}
+.myScore {
+  font-size: 22px;
 }
 
 </style>

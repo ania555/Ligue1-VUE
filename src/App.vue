@@ -25,6 +25,7 @@
       <!-- <router-link to="/fixtures">Fixtures</router-link> |
       <router-link to="/standings">Standings</router-link> |
       <router-link to="/teams">Teams</router-link>  -->
+     
   <div>
     <router-view/>
   </div>
@@ -58,26 +59,26 @@ export default {
       teamsFr: [],
       fruit: "orange",
       teamLogos: [
-        { id: 543, name: "FC Nantes", venue: "Stade de la Beaujoire - Louis Fonteneau", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/qxtuvw1473504792.png"},
-        { id: 548, name: "AS Monaco FC", venue: "Stade Louis II.", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/xwxsxq1473504775.png"},
-        { id: 527, name: "AS Saint-Étienne", venue: "Stade Geoffroy-Guichard", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/lqc1031518124880.png"},
-        { id: 538, name: "En Avant Guingamp", venue: "Stade du Roudourou", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/uxxxsv1473504732.png"},
-        { id: 556, name: "Nîmes Olympique", venue: "Stade des Costières", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/yvxuwy1426871421.png"},
-        { id: 523, name: "Olympique Lyonnais", venue: "Groupama Stadium", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/vwtvyt1473504756.png"},
-        { id: 547, name: "Stade de Reims", venue: "Stade Auguste-Delaune II", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/wqxupr1473505457.png"},
-        { id: 518, name: "Montpellier HSC", venue: "Stade de la Mosson", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/spxtvu1473504783.png"},
-        { id: 576, name: "RC Strasbourg Alsace", venue: "Stade de la Meinau", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/yuxtyy1464540071.png"},
-        { id: 516, name: "Olympique de Marseille", venue: "Orange Vélodrome", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/uutsyt1473504764.png"},
-        { id: 514, name: "SM Caen", venue: "Stade Michel d'Ornano", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/uwuuqu1467461847.png"},
-        { id: 532, name: "Angers SCO", venue: "Stade Raymond Kopa", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/twtppr1426871974.png"},
-        { id: 511, name: "Toulouse FC", venue: "Stadium Municipal", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/xtwuyr1473504835.png"},
-        { id: 526, name: "FC Girondins de Bordeaux", venue:  "Stade Matmut-Atlantique", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/wtwvyx1473504715.png"},
-        { id: 521, name: "Lille OSC", venue: "Stade Pierre-Mauroy", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/2giize1534005340.png"},
-        { id: 524, name: "Paris Saint-Germain FC", venue: "Parc des Princes", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/rwqrrq1473504808.png"},
-        { id: 528, name: "Dijon Football Côte d'Or", venue: "Stade Gaston Gérard", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/tustuw1473504724.png"},
-        { id: 530, name: "Amiens SC", venue: "Stade de la Licorne", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/yvxwwq1471876116.png"},
-        { id: 522, name: "OGC de Nice Côte d'Azur", venue: "Stade de Nice", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/qwvtvt1473504800.png"},
-        { id: 529, name: "Stade Rennais FC 1901", venue: "Roazhon Park", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/ypturx1473504818.png"},
+        { id: 530, picBadge: "images/amiens.jpg", shortName: "Amiens SC", name: "Amiens SC", venue: "Stade de la Licorne", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/yvxwwq1471876116.png"},
+        { id: 532, picBadge: "images/angers.jpg", shortName: "Angers SCO", name: "Angers SCO", venue: "Stade Raymond Kopa", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/twtppr1426871974.png"},
+        { id: 526, picBadge: "images/bordeaux.jpg", shortName: "Bordeaux", name: "FC Girondins de Bordeaux", venue:  "Stade Matmut-Atlantique", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/wtwvyx1473504715.png"},
+        { id: 514, picBadge: "images/caen.jpg", shortName: "SM Caen", name: "SM Caen", venue: "Stade Michel d'Ornano", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/uwuuqu1467461847.png"},
+        { id: 528, picBadge: "images/dijon.jpg", shortName: "Dijon FCO", name: "Dijon Football Côte d'Or", venue: "Stade Gaston Gérard", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/tustuw1473504724.png"},
+        { id: 538, picBadge: "images/guingamp.jpg", shortName: "EA Guingamp", name: "En Avant Guingamp", venue: "Stade du Roudourou", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/uxxxsv1473504732.png"},
+        { id: 521, picBadge: "images/lille.jpg", shortName: "Lille OSC", name: "Lille OSC", venue: "Stade Pierre-Mauroy", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/2giize1534005340.png"},
+        { id: 523, picBadge: "images/lyon.jpg", shortName: "Olympique Lyon", name: "Olympique Lyonnais", venue: "Groupama Stadium", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/vwtvyt1473504756.png"},
+        { id: 516, picBadge: "images/marseille.jpg", shortName: "Marseille", name: "Olympique de Marseille", venue: "Orange Vélodrome", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/uutsyt1473504764.png"},
+        { id: 548, picBadge: "images/monaco.jpg", shortName: "AS Monaco", name: "AS Monaco FC", venue: "Stade Louis II.", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/xwxsxq1473504775.png"},
+        { id: 518, picBadge: "images/montpellier.jpg", shortName: "Montpellier", name: "Montpellier HSC", venue: "Stade de la Mosson", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/spxtvu1473504783.png"},
+        { id: 543, picBadge: "images/nantes.jpg", shortName: "FC Nantes", name: "FC Nantes", venue: "Stade de la Beaujoire - L. Fonteneau", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/qxtuvw1473504792.png"},
+        { id: 522, picBadge: "images/nice.jpg", shortName: "OGC Nice", name: "OGC de Nice Côte d'Azur", venue: "Stade de Nice", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/qwvtvt1473504800.png"},
+        { id: 556, picBadge: "images/nîmes.jpg", shortName: "Nîmes Ol.", name: "Nîmes Olympique", venue: "Stade des Costières", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/yvxuwy1426871421.png"},
+        { id: 524, picBadge: "images/paris.jpg", shortName: "PSG", name: "Paris Saint-Germain FC", venue: "Parc des Princes", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/rwqrrq1473504808.png"},
+        { id: 547, picBadge: "images/reims.jpg", shortName: "Stade de Reims", name: "Stade de Reims", venue: "Stade Auguste-Delaune II", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/wqxupr1473505457.png"},
+        { id: 529, picBadge: "images/stade-rennais.jpg", shortName: "Stade Rennes", name: "Stade Rennais FC 1901", venue: "Roazhon Park", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/ypturx1473504818.png"},
+        { id: 527, picBadge: "images/asse.jpg", shortName: "Saint-Étienne", name: "AS Saint-Étienne", venue: "Stade Geoffroy-Guichard", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/lqc1031518124880.png"},
+        { id: 576, picBadge: "images/strasbourg.jpg", shortName: "RC Strasbourg", name: "RC Strasbourg Alsace", venue: "Stade de la Meinau", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/yuxtyy1464540071.png"},
+        { id: 511, picBadge: "images/toulouse.jpg", shortName: "Toulouse FC", name: "Toulouse FC", venue: "Stadium Municipal", crestUrl: "https://www.thesportsdb.com/images/media/team/badge/small/xtwuyr1473504835.png"},
       ],
 
     }
