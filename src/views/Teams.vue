@@ -4,12 +4,19 @@
       <p>loading</p>
     </div>
     <div v-else>
+      <!-- <div id="vvv"></div> -->
       <br>
       <div class="container">
         <div class="tContainer">
           <div class="oneTeam" v-for="(team, i) in teamBadge" :key="i">
-            <div></div>
-            <img :src="team.picBadge" alt="">
+            <!-- <div class="oneBackground" v-bind:style='{ backgroundImage: "url(" + team.picBadge + ")",}'> -->
+            <div class="oneBackground"  v-bind:style='{ backgroundColor: team.color}'>  
+              <img :src="team.picBadge" alt="">
+              <div class="clubButton">CLUB PROFILE
+                <i class="arrow-right"></i>
+              </div>
+            </div>
+            <!-- <img :src="team.picBadge" alt=""> -->
 
           </div>
         </div>
@@ -93,20 +100,61 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 .teams {
   background-color: rgb(245, 250, 220);
 }
 .tContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
   
 }
 .oneTeam {
- width: 50%;
+ width: 48%;
  }
-img {
-  width: 95%;
-  height: auto;
+ .oneBackground {
+   /* background-color: aquamarine; */
+   display: flex;
+   flex-flow: column;
+ }
+ img {
+   width: 95%;
+   height: auto;
+   align-self: center;
+   margin-top: 5px;
+ }
+ .clubButton {
+    text-align: center;
+    text-decoration: none;
+    background: rgba(202,202,202, 0.2 );
+    color:black;
+    display: block;
+    transition: all .2s;
+    align-self: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    line-height: 2rem;
+    width: 80%;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
+ i {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.arrow-right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+#vvv {
+  background-image: url("~/images/amiens.jpg");
+  height: 100px;
+}
 </style>
