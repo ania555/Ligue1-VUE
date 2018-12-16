@@ -6,20 +6,20 @@
     <div v-else>
       <!-- <div id="vvv"></div> -->
       <br>
-      <div class="container">
+      <div class="myContainer">
+        <onemyteam v-if="isModalVisible" v-on:close="popClose" :modalTeam="currentTeam" :modalTeamsFr="teamsFr"/>
         <div class="tContainer">
           <div class="oneTeam" v-for="(team, i) in teamBadge" :key="i">
             <!-- <div class="oneBackground" v-bind:style='{ backgroundImage: "url(" + team.picBadge + ")",}'> -->
             <div class="oneBackground"  v-bind:style='{ backgroundColor: team.color}'>  
               <img :src="team.picBadge" alt="">
-              <div class="clubButton">CLUB PROFILE
+              <div class="oneTeamName" v-bind:style='{ color: team.nameColor}'>{{ team.shortName }}</div>
+              <div class="clubButton" v-on:click="popUp(team)" v-bind:style='{ color: team.teamColor}'>Club Profile
                 <i class="arrow-right"></i>
               </div>
             </div>
-            <!-- <img :src="team.picBadge" alt=""> -->
-
           </div>
-        </div>
+        </div><br><br><br><br><br>
       </div>
     </div>
   </div>
@@ -28,14 +28,19 @@
 
 
 <script>
+import Onemyteam from '@/components/Onemyteam.vue'
+
 export default {
-    name: 'teams',
+  name: 'teams',
   components: {
+    Onemyteam,
   },
    data() {
      return {
        num: 874,
        isLoading: true,
+       isModalVisible: false,
+       currentTeam: null,
        teamsFr: [],
        teamBadge: [],
        teamMaps: [
@@ -76,22 +81,35 @@ export default {
              "X-Auth-Token": "1ed4b35be67142019d8659de8108d1f7"
     });
     const myInit = {
-             method: 'GET',
+            method: 'GET',
             headers: myHeaders,
             mode: 'cors'
     };
     fetch(url, myInit).then((response) => {
-                    return response.json()
-                })
-                .then((json) => {
-                    console.log("teams");
-                    this.teamsFr = json.teams;
-                    this.isLoading = false,
-                    console.log(this.teamsFr);
-                })
-                .catch((error) => {
-                    console.log("Request failed: " + error.message)
-                })
+      return response.json()
+    })
+   .then((json) => {
+      console.log("teams");
+      this.teamsFr = json.teams;
+      this.isLoading = false,
+      console.log(this.teamsFr);
+    })
+   .catch((error) => {
+      console.log("Request failed: " + error.message)
+    })
+  },
+  methods: {
+    popUp(item) {
+      console.log("open");
+      this.currentTeam = item
+      console.log(this.currentTeam)
+      console.log(this.isModalVisible)
+      this.isModalVisible = true;
+    },
+    popClose() {
+      console.log("close");
+      this.isModalVisible = false;
+    }
   },
 }
 </script>
@@ -104,6 +122,10 @@ export default {
 .teams {
   background-color: rgb(245, 250, 220);
 }
+
+.myContainer {
+  margin: 5px 0px 5px 0px;
+}
 .tContainer {
   display: flex;
   flex-wrap: wrap;
@@ -113,6 +135,7 @@ export default {
 }
 .oneTeam {
  width: 48%;
+ padding: 5px 0px 5px 0px;
  }
  .oneBackground {
    /* background-color: aquamarine; */
@@ -120,29 +143,33 @@ export default {
    flex-flow: column;
  }
  img {
-   width: 95%;
+   width: 90%;
    height: auto;
    align-self: center;
-   margin-top: 5px;
+   margin-top: 15px;
+ }
+ .oneTeamName {
+   padding-top: 5px;
+   font-weight: bold;
+
  }
  .clubButton {
     text-align: center;
     text-decoration: none;
-    background: rgba(202,202,202, 0.2 );
-    color:black;
+    background: rgba(150,150,150,0.3);
     display: block;
     transition: all .2s;
     align-self: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     cursor: pointer;
     line-height: 2rem;
-    width: 80%;
+    width: 90%;
     border-radius: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
- i {
+i {
   border: solid black;
   border-width: 0 2px 2px 0;
   display: inline-block;

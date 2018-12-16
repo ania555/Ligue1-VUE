@@ -46,13 +46,11 @@
 
 
 <script>
-import Game from '@/components/Game.vue'
 import moment from 'moment'
 
 export default {
   name: 'fixtures',
   components: {
-    Game,
   },
   data() {
     return {
@@ -76,37 +74,37 @@ export default {
   created() {
     let url = "https://api.football-data.org/v2/competitions/FL1/matches";
     let myHeaders = new Headers({
-             "X-Auth-Token": "1ed4b35be67142019d8659de8108d1f7"
+     "X-Auth-Token": "1ed4b35be67142019d8659de8108d1f7"
     });
     const myInit = {
-            method: 'GET',
-            headers: myHeaders,
-            mode: 'cors'
+      method: 'GET',
+      headers: myHeaders,
+      mode: 'cors'
     };
     fetch(url, myInit).then((response) => {
-                    return response.json()
-                })
-                .then((json) => {
-                    console.log("matches");
-                    this.allMatches = json.matches;
-                    this.isLoading = false;
-                    console.log(this.allMatches);
-                })
-                .catch((error) => {
-                    console.log("Request failed: " + error.message)
-                })
+      return response.json()
+    })
+    .then((json) => {
+      console.log("matches");
+      this.allMatches = json.matches;
+      this.isLoading = false;
+      console.log(this.allMatches);
+    })
+    .catch((error) => {
+      console.log("Request failed: " + error.message)
+    })
   },
   computed: {
-     matchDayOptions() {
-       let allOptions = [];
-       allOptions.push(this.allMatches[0].matchday);
-       for (let i = 1; i < this.allMatches.length; i++) {
-         if (this.allMatches[i].matchday !== this.allMatches[i -1].matchday) {
-           allOptions.push(this.allMatches[i].matchday);
-         }
-       }
-       return allOptions; 
-     },
+    matchDayOptions() {
+      let allOptions = [];
+      allOptions.push(this.allMatches[0].matchday);
+      for (let i = 1; i < this.allMatches.length; i++) {
+        if (this.allMatches[i].matchday !== this.allMatches[i -1].matchday) {
+          allOptions.push(this.allMatches[i].matchday);
+        }
+      }
+      return allOptions; 
+    },
     //  toDay() {
     //    let currentDay = this.allMatches[0].season.currentMatchday;
     //    return currentDay;
@@ -119,24 +117,24 @@ export default {
         if (this.selected == 'Select day' && this.selectedTeam == 'Select team') {
           return this.allMatches.filter((match) => {
                     return match.matchday == currentDay;
-                })
+          })
         }
         else if (this.selected != 'Select day' && this.selectedTeam == 'Select team') {
           return this.allMatches.filter((match) => {
-                    return match.matchday == this.selected;
-                })
+            return match.matchday == this.selected;
+          })
         } 
          else if (this.selected == 'Select day' && this.selectedTeam != 'Select team') {
           return this.allMatches.filter((match) => {
-                    if (match.homeTeam.name == this.selectedTeam || match.awayTeam.name == this.selectedTeam)
-                    return match;
-                })   
+            if (match.homeTeam.name == this.selectedTeam || match.awayTeam.name == this.selectedTeam)
+              return match;
+            })   
         }
         else if (this.selected != 'Select day' && this.selectedTeam != 'Select team') {
           return this.allMatches.filter((match) => {
-                    if (match.homeTeam.name == this.selectedTeam || match.awayTeam.name == this.selectedTeam)
-                    return match;
-                }) 
+            if (match.homeTeam.name == this.selectedTeam || match.awayTeam.name == this.selectedTeam)
+              return match;
+          }) 
      }
     }
   },
