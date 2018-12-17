@@ -7,15 +7,20 @@
       <!-- <div id="vvv"></div> -->
       <br>
       <div class="myContainer">
-        <onemyteam v-if="isModalVisible" v-on:close="popClose" :modalTeam="currentTeam" :modalTeamsFr="teamsFr"/>
+        <onemyteam v-if="isModalVisible" v-on:close="popClose" :modalTeam="currentTeam" :modalTeamsFr="teamsFr" :modalMaps="teamMaps"/>
         <div class="tContainer">
           <div class="oneTeam" v-for="(team, i) in teamBadge" :key="i">
             <!-- <div class="oneBackground" v-bind:style='{ backgroundImage: "url(" + team.picBadge + ")",}'> -->
             <div class="oneBackground"  v-bind:style='{ backgroundColor: team.color}'>  
               <img :src="team.picBadge" alt="">
               <div class="oneTeamName" v-bind:style='{ color: team.nameColor}'>{{ team.shortName }}</div>
-              <div class="clubButton" v-on:click="popUp(team)" v-bind:style='{ color: team.teamColor}'>Club Profile
-                <i class="arrow-right"></i>
+              <div class="clubButton" v-on:click="popUp(team)" v-bind:style='{ color: team.teamColor}'>
+                <p>Club Profile</p>
+                <div class="offArrow">
+                  <img id="arrow" src="images/arrow-icon.png">
+                  <img id="arrow" src="images/arrow-icon.png">
+                </div>
+                <!-- <i class="arrow-right"></i> -->
               </div>
             </div>
           </div>
@@ -131,55 +136,49 @@ export default {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: stretch;
-  
 }
 .oneTeam {
- width: 48%;
- padding: 5px 0px 5px 0px;
- }
- .oneBackground {
-   /* background-color: aquamarine; */
-   display: flex;
-   flex-flow: column;
- }
- img {
-   width: 90%;
-   height: auto;
-   align-self: center;
-   margin-top: 15px;
- }
- .oneTeamName {
-   padding-top: 5px;
-   font-weight: bold;
-
- }
- .clubButton {
-    text-align: center;
-    text-decoration: none;
-    background: rgba(150,150,150,0.3);
-    display: block;
-    transition: all .2s;
-    align-self: center;
-    font-size: 0.8rem;
-    cursor: pointer;
-    line-height: 2rem;
-    width: 90%;
-    border-radius: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+ width: 47%;
+ padding: 6px 0px 6px 0px;
 }
-
-i {
-  border: solid black;
-  border-width: 0 2px 2px 0;
-  display: inline-block;
-  padding: 3px;
+.oneBackground {
+  display: flex;
+  flex-flow: column;  
 }
-.arrow-right {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
+img {
+  width: 90%;
+  height: auto;
+  align-self: center;
+  margin-top: 15px;
 }
-
+.oneTeamName {
+  padding-top: 5px;
+  font-weight: bold;
+}
+.clubButton {
+  align-self: center;
+  text-decoration: none;
+  background: rgba(150,150,150,0.3);
+  font-size: 14px;
+  cursor: pointer;
+  height: 30px;
+  width: 90%;
+  border-radius: 5px;
+  margin: 5px 0px 10px 0px;
+  padding-top: 5px;
+}
+#arrow {
+  height: 17px;
+  width: auto;
+  margin: 10px -12px 0px 0px;
+  
+}
+.offArrow {
+  margin: -45px 12px 0px 0px;
+  position: relative;
+  float: right;
+  clear: right;
+}
 #vvv {
   background-image: url("~/images/amiens.jpg");
   height: 100px;
