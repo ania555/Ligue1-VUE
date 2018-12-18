@@ -28,6 +28,11 @@ export default new Router({
       path: '/teams',
       name: 'teams',
       component: () => import(/* webpackChunkName: "teams" */ './views/Teams.vue')
-    }
+    },
+    {
+      path: '/chat',
+      name: 'chat',
+      component: () => import(/* webpackChunkName: "chat" */ './views/Chat.vue')
+    },
   ]
 })

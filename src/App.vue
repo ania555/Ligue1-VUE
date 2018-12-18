@@ -16,6 +16,7 @@
               <router-link class="nav-link" :to="{ name: 'fixtures', params:{ teamsforSchedule: this.teamLogos}} ">Schedule</router-link>
               <router-link class="nav-link" :to="{ name: 'standings', params:{ teamsForStandings: this.teamLogos}}">Standings</router-link>
               <router-link class="nav-link" :to="{ name: 'teams', params:{ teamsForTeams: this.teamLogos}}">Teams</router-link>
+              <router-link class="nav-link" :to="{ name: 'chat'}">Chat</router-link>
               <b-nav-item href="#">Link</b-nav-item>
             </b-navbar-nav>
           </b-collapse>
@@ -31,10 +32,9 @@
   </div>
 </div>
 
-
-
-
 </template>
+
+
 
 
 <script>
@@ -43,6 +43,7 @@ import Home from './views/Home.vue'
 import Fixtures from './views/Fixtures.vue'
 import Standings from './views/Standings.vue'
 import Teams from './views/Teams.vue'
+import Chat from './views/Chat.vue'
 
 export default {
  name: 'App',
@@ -51,6 +52,7 @@ export default {
     Fixtures,
     Standings,
     Teams,
+    Chat,
   },
   data() {
     return {

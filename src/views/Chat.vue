@@ -1,75 +1,54 @@
 <template>
-  <div class="home">
-    <br><br>
-
-    <form>
-      <input type="email" v-model="email" placeholder="Email"> <br>
-      <input type="password" v-model="password" placeholder="Password">
-    </form>  
-      <button v-on:click="register()"> Register </button>
-      <button  v-on:click="login()"> Login</button>
-    
-    <button v-on:click="logout()"> Logout </button>
-
-    <hr>
-
-    <div>
-      <input type="text" v-model="msg">
-      <button v-on:click="writeNewPost()">Send</button>
-
+  <div class="chat">
+    <br>
+   <b-container>
+      <b-form>
+        <b-form-group>
+          <b-form-input type="email" v-model="email" placeholder="Email"></b-form-input>
+        </b-form-group>
+        <b-form-group>
+          <b-form-input type="password" v-model="password" placeholder="Password"></b-form-input>
+        </b-form-group>
+        <b-button v-on:click="register()"> Register </b-button>
+        <b-button v-on:click="login()"> Login</b-button>
+        <b-button v-on:click="logout()"> Logout </b-button>
+      </b-form>
       <hr>
+      <b-form inline>
+        <b-form-input id="chatInput" type="text" v-model="msg"></b-form-input>
+        <b-button v-on:click="writeNewPost()">Send</b-button>
+      </b-form>
+        <hr>
 
-      <div v-for="(msg, index) in messages" :key="index">
-        <p>{{msg.name}}</p>
-        <p>{{msg.email}}</p>
-        <p>{{msg.date}}</p>
-        <p>{{msg.body}}</p>
+      <div id="scrollme" class="chatContainer">
+        <div v-for="(msg, index) in messages" :key="index">
+          <p class="small">{{msg.name}}</p>
+          <p class="small">{{msg.email}}</p>
+          <p class="small">{{msg.date}}</p>
+          <p>{{msg.body}}</p>
+          <hr id="divider">
+        </div>
       </div>
 
-    </div>
 
-
-
-    <br><br><br><br>
-    <!-- <div class="scrollMe">
-      <table>
-      <thead>
-      <tr>
-        <th></th>
-        <th class="fixHead2">head</th>
-        <th class="fixHead3">head</th>
-        <th class="FixHead4">head</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th>head</th>
-        <td class="fixColumn2" >bodytfdtdtfdfd</td>
-        <td class="fixColumn3">bodyzfdd</td>
-        <td class="fixColumn4">bodyfxfx</td>
-      </tr>
-
-      </tbody>
-      </table>
-    </div> -->
-    
+   </b-container>
+   
   </div>
 </template>
 
+
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
- 
 
 export default {
-  name: 'home',
+  name: 'chat',
   components: {
-    HelloWorld
+    
   },
   data() {
     return {
@@ -81,8 +60,8 @@ export default {
       message: "",
     }
   },
-  created() {
-    
+  updated() {
+  this.scroll();
   },
   methods: {
     register() {
@@ -91,7 +70,6 @@ export default {
         alert('Please provide the email and password');
         return;
       }
-
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
       .then(user => {
         this.message = 'Successfully created user';
@@ -168,6 +146,9 @@ export default {
         .on("value", data => {
           this.messages = data.val()});
     },
+    scroll() {
+      document.getElementById('scrollme').scrollTop = document.getElementById('scrollme').scrollHeight;
+    },
   },
 }
 </script>
@@ -175,54 +156,28 @@ export default {
 
 
 <style scoped>
-
+.chat {
+  background-color: rgb(245, 250, 220);
+}
 button {
   margin: 10px;
 }
-
-.scrollMe {
-  max-width: 100%;
-  max-height: 500px;
-  overflow: scroll;
-  position: relative;
+#chatInput {
+  width: 73%;
 }
-table {
-  position: relative;
-  border-collapse: collapse;
+.chatContainer {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 300px;
 }
-td, th {
-  padding: 5px;
-  width: 50px;
+.chatContainer div {
+  
+  -ms-scroll-snap-points-y: 
+  
 }
-thead th {
-  position: -webkit-sticky; /* for Safari */
-  position: sticky;
-  top: 0;
-  background: #000;
-  color: #FFF;
+#divider {
+  width: 50%;
+  height: 5px;
 }
-thead th:first-child {
-  left: 0;
-  z-index: 1;
-}
-.fixHead2 {
-  left: 47px;
-  z-index: 1;
-}
-.fixColumn2 {
-  position: -webkit-sticky; /* for Safari */
-  position: sticky;
-  left: 47px;
-  background: #FFF;
-  border-right: 1px solid #CCC;
-}
-
-tbody th {
-  position: -webkit-sticky; /* for Safari */
-  position: sticky;
-  left: 0;
-  background: #FFF;
-  border-right: 1px solid #CCC;
-}
-
 </style>
+
