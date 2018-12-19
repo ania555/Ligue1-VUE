@@ -56,10 +56,11 @@
 
 
 <script>
+
+
 export default {
     name: 'standings',
-  components: {
-    
+    components: {
   },
    data() {
     return {
@@ -220,8 +221,10 @@ thead th {
   position: -webkit-sticky; /* for Safari */
   position: sticky;
   top: 0;
-  background: #000;
+  background: rgb(135, 140, 125);
   color: #FFF;
+  border-top: 0px;
+  height:40px;
 }
 thead th:first-child {
   left: 0;

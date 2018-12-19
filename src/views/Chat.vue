@@ -1,37 +1,44 @@
 <template>
   <div class="chat">
     <br>
-   <b-container>
-      <b-form>
-        <b-form-group>
-          <b-form-input type="email" v-model="email" placeholder="Email"></b-form-input>
-        </b-form-group>
-        <b-form-group>
-          <b-form-input type="password" v-model="password" placeholder="Password"></b-form-input>
-        </b-form-group>
-        <b-button v-on:click="register()"> Register </b-button>
-        <b-button v-on:click="login()"> Login</b-button>
-        <b-button v-on:click="logout()"> Logout </b-button>
-      </b-form>
-      <hr>
-      <b-form inline>
-        <b-form-input id="chatInput" type="text" v-model="msg"></b-form-input>
-        <b-button v-on:click="writeNewPost()">Send</b-button>
-      </b-form>
-        <hr>
+   <div class="chatWrap">
+      <b-row>
+        <b-col sm="6">
+          <b-form>
+            <b-form-group>
+              <b-form-input type="email" v-model="email" placeholder="Email"></b-form-input>
+            </b-form-group>
+            <b-form-group>
+              <b-form-input type="password" v-model="password" placeholder="Password"></b-form-input>
+            </b-form-group>
+            <div class="buttonContainer">
+              <b-button class="formButton" v-on:click="register()"> Register </b-button>
+              <b-button class="formButton" v-on:click="login()"> Login</b-button>
+              <b-button class="formButton" v-on:click="logout()"> Logout </b-button>
+            </div>
+          </b-form>
+          <hr>
+          <b-form inline>
+            <b-form-input id="chatInput" type="text" v-model="msg"></b-form-input>
+            <b-button id="sendButton" v-on:click="writeNewPost()">Send</b-button>
+          </b-form>
+            <hr>
+        </b-col>
+        <b-col sm="6">
+          <div id="scrollme" class="chatContainer">
+            <div v-for="(msg, index) in messages" :key="index">
+              <p class="small">{{msg.name}}</p>
+              <p class="small">{{msg.email}}</p>
+              <p class="small">{{msg.date}}</p>
+              <p>{{msg.body}}</p>
+              <hr id="divider">
+            </div>
+          </div>
+        </b-col>  
+      </b-row>
+      
 
-      <div id="scrollme" class="chatContainer">
-        <div v-for="(msg, index) in messages" :key="index">
-          <p class="small">{{msg.name}}</p>
-          <p class="small">{{msg.email}}</p>
-          <p class="small">{{msg.date}}</p>
-          <p>{{msg.body}}</p>
-          <hr id="divider">
-        </div>
-      </div>
-
-
-   </b-container>
+   </div>
    
   </div>
 </template>
@@ -39,6 +46,7 @@
 
 <script>
 // @ is an alias to /src
+
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -90,29 +98,14 @@ export default {
         alert('Please provide the email and password');
         return;
       }
-      
-      // var provider = new firebase.auth.GoogleAuthProvider();
 
-      /* firebase.auth().signInWithPopup(provider)
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
       .then(result => {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-          // let user = firebase.auth().currentUser;
-          this.user = user;
-          console.log(user);
-          console.log(user.displayName);
-          console.log(user.email);
-        }) */
-
-        firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        .then(result => {
-          this.user = firebase.auth().currentUser;
-        })
-        .catch(function(error) {
-          alert("error" + error.message);
-        });
+        this.user = firebase.auth().currentUser;
+      })
+      .catch(function(error) {
+        alert("error" + error.message);
+      });
     },
     logout() {
       firebase.auth().signOut()
@@ -159,21 +152,28 @@ export default {
 .chat {
   background-color: rgb(245, 250, 220);
 }
-button {
-  margin: 10px;
+.chatWrap {
+  width: 100%;
+  padding: 0px 15px 10px 15px;
+}
+.buttonContainer {
+  display: flex;
+}
+.formButton {
+   margin-right: 5px;
+   background-color: rgb(46, 46, 128); 
+}
+#sendButton {
+  margin: 0px 0px 0px 5px;
+  background-color: rgb(130, 130, 130); 
 }
 #chatInput {
   width: 73%;
 }
 .chatContainer {
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; */
   overflow-y: scroll;
-  height: 300px;
-}
-.chatContainer div {
-  
-  -ms-scroll-snap-points-y: 
-  
+  height: 280px;
 }
 #divider {
   width: 50%;

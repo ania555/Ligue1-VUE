@@ -24,9 +24,10 @@
               </div>
             </div>
           </div>
-        </div><br><br><br><br><br>
+        </div>
       </div>
     </div>
+  
   </div>
 </template>
 
@@ -34,6 +35,7 @@
 
 <script>
 import Onemyteam from '@/components/Onemyteam.vue'
+
 
 export default {
   name: 'teams',
@@ -158,7 +160,7 @@ img {
 .clubButton {
   align-self: center;
   text-decoration: none;
-  background: rgba(150,150,150,0.3);
+  background: rgba(150,150,150,0.25);
   font-size: 14px;
   cursor: pointer;
   height: 30px;
