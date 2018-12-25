@@ -10,7 +10,8 @@
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav>
-            <router-link class="nav-link" to="/">Home</router-link>
+            <!-- <router-link class="nav-link" to="/">Home</router-link> -->
+            <router-link class="nav-link" :to="{ name: 'home', params:{ teamsForHome: this.teamLogos}}">Home</router-link>
             <router-link class="nav-link" :to="{ name: 'fixtures', params:{ teamsforSchedule: this.teamLogos}} ">Schedule</router-link>
             <router-link class="nav-link" :to="{ name: 'standings', params:{ teamsForStandings: this.teamLogos}}">Standings</router-link>
             <router-link class="nav-link" :to="{ name: 'teams', params:{ teamsForTeams: this.teamLogos}}">Teams</router-link>

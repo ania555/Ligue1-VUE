@@ -16,35 +16,29 @@
         <h5>Best Scorers</h5>
         <div id="scorersContainer">
           <b-carousel id="scorerCarousel" controls indicators:interval="4000" v-model="slide" @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
-
-          <!-- Text slides with image -->
-          <b-carousel-slide caption="First slide" text="Nulla v" img-src="https://picsum.photos/1024/480/?image=52"></b-carousel-slide>
-
-          <!-- Slides with custom text -->
-          <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-            <h1>Hello world!</h1>
-          </b-carousel-slide>
-
-          <!-- Slides with image only -->
-          <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
-
-          <!-- Slides with img slot -->
-          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-          <b-carousel-slide>
-            <img slot="img" class="d-block img-fluid w-100" width="1024" height="480"
-                src="https://picsum.photos/1024/480/?image=55" alt="image slot">
-          </b-carousel-slide>
-
-          <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-          <b-carousel-slide class="oneImage">
-            <img  src="images/ASSE-abstraction.jpg" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </b-carousel-slide>
-        </b-carousel>
-        <p class="mt-4">
-          Slide #: {{ slide }}<br>
-          Sliding: {{ sliding }}
-        </p> 
+            <b-carousel-slide class="oneImage" v-for="(scorer, i) in allScorers" :key="i">
+              <div class="sContainer">
+                <h4>{{ i + 1 }} {{ scorer.player.name }}</h4><br>
+                <div class="sData">
+                  <!-- <p>{{ scorer.player.position }}</p> -->
+                  <p>{{ scorer.player.nationality }}</p>
+                  <!-- <p>{{ scorer.player.shirtNumber }}</p> -->
+                  <p>{{ myTeam(scorer) }}</p>
+                  <p class="myScore">{{ scorer.numberOfGoals }}</p>
+                </div>
+                <img class="playerPic" :src="myPhoto(scorer)" alt="">
+                <div class="stripeBadge"  v-bind:style='{ backgroundColor: myBackground(scorer)}'>
+                  <div class="circleBadge">
+                    <img class="badgePic"  :src="myBadge(scorer)" alt="">
+                  </div>
+                </div>
+              </div>  
+            </b-carousel-slide>
+          </b-carousel>
+          <p class="mt-4">
+            Slide #: {{ slide }}<br>
+            Sliding: {{ sliding }}
+          </p> 
       </div>
     </div>
 
@@ -87,9 +81,30 @@ export default {
     return {
       isLoading: true,
       allScorers: [],
+      homeBadge: [],
       slide: 0,
       sliding: null,
+      scorPhotos: [
+        {id: 3374, scorerPhoto: "images/Kylian-Mbappe.jpg"},
+        {id: 8705, scorerPhoto: "images/Emiliano-Sala.jpg"},
+        {id: 8412, scorerPhoto: "images/Nicolas-Pepe.jpg"},
+        {id: 3370, scorerPhoto: "images/Florian-Thauvin.jpg"},
+        {id: 8491, scorerPhoto: "images/Neymar-Jr.jpg"},
+        {id: 3170, scorerPhoto: "images/Edinson-Cavani.jpg"},
+        {id: 3598, scorerPhoto: "images/Wahbi-Khazri.jpg"},
+        {id: 1043, scorerPhoto: "images/Lebo-Mothiba.jpg"},
+        {id: 8547, scorerPhoto: "images/Jonathan-Bamba.jpg"},
+        {id: 8518, scorerPhoto: "images/Francois-Kamano.jpg"},
+      ],
     }
+  },
+  mounted() {
+    console.log(this.$route.params.teamsforHome)
+     if(!this.$route.params.teamsforHome) {
+       this.homeBadge = this.$parent.teamLogos
+     } else {
+       this.homeBadge = this.$route.params.teamsforHome
+     }
   },
   created() {
     let url = "https://api.football-data.org/v2/competitions/FL1/scorers";
@@ -121,6 +136,30 @@ export default {
     onSlideEnd (slide) {
       this.sliding = false
     },
+    myBadge(item) {
+      for (let i = 0; i < this.homeBadge.length; i++) {
+        if(this.homeBadge[i].id === item.team.id) 
+        return this.homeBadge[i].crestUrl;
+      }
+    },
+    myBackground(item) {
+      for (let i = 0; i < this.homeBadge.length; i++) {
+        if(this.homeBadge[i].id === item.team.id) 
+        return this.homeBadge[i].color;
+      }
+    },
+    myTeam(item) {
+      for (let i = 0; i < this.homeBadge.length; i++) {
+        if(this.homeBadge[i].id === item.team.id) 
+        return this.homeBadge[i].shortName;
+      }
+    },
+    myPhoto(item) {
+      for (let i = 0; i < this.scorPhotos.length; i++) {
+        if(this.scorPhotos[i].id === item.player.id) 
+        return this.scorPhotos[i].scorerPhoto;
+      }
+    }
   },
 }
 </script>
@@ -157,14 +196,64 @@ iframe {
 }
 #scorerCarousel {
   text-shadow: 1px 1px 2px #333;
-  background: #ababab;
-  
+  background-image: url("~@/assets/Ligue-1-blue.jpg");
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  height: 350px;
 }
 .oneImage {
+  padding: 0px;
+  height: 350px;
+  width: 100%;
+  background-color: rgba(100, 100, 100, 0.9);
+}
+.sContainer {
+  position: relative;
+  width: 143%;
+  margin-left: -21.5%; 
+}
+.ordNumbScor {
+  position: relative;
+  margin: 0px 0px -30px -240px;
+}
+.sData {
+  position: relative;
+  margin: 0px 0px -150px 60px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
+}
+.myScore {
+  font-size: 32px;
+}
+.playerPic {
+  position: relative;
+  margin: 0px 0px -45px 140px;
   height: 200px;
+  width: auto;
+}
+.stripeBadge {
+  padding: 5px 0px 5px 35px;
+}
+.circleBadge {
+  width: 60px;
+  background-color: whitesmoke;
+  padding: 10px 0px 5px 0px;
+  border-radius: 45px;
+}
+.badgePic {
+  height: 40px;
+  width: auto;
 }
 
-.scrollMe {
+
+
+
+
+/* .scrollMe {
   max-width: 100%;
   max-height: 500px;
   overflow: scroll;
@@ -177,7 +266,7 @@ table {
 td, th {
   padding: 5px;
   width: 50px;
-}
+} */
 thead th {
   position: -webkit-sticky; /* for Safari */
   position: sticky;
@@ -185,14 +274,14 @@ thead th {
   background: #000;
   color: #FFF;
 }
-thead th:first-child {
+/* thead th:first-child {
   left: 0;
   z-index: 1;
 }
 .fixHead2 {
   left: 47px;
   z-index: 1;
-}
+} */
 .fixColumn2 {
   position: -webkit-sticky; /* for Safari */
   position: sticky;
