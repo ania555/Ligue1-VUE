@@ -5,7 +5,7 @@
     </div>
     <div v-else>
        <div>
-        <b-form-select v-model="picked">
+        <b-form-select class="selectMe" v-model="picked">
            <option>GENERAL</option>
            <option>HOME</option>
             <option>AWAY</option>
@@ -153,6 +153,9 @@ export default {
 
 .standings {
   background-color: rgb(245, 250, 220);
+}
+.selectMe { 
+  width: 140px;
 }
 
 select {

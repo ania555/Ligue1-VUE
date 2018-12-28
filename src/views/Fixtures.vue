@@ -6,11 +6,11 @@
     <div v-else>
       <div class="container">
       <div>
-        <b-form-select v-model="selected">
+        <b-form-select class="selectMe" v-model="selected">
           <option>Select day</option>
           <option v-for="(oneday, i) in matchDayOptions" :key="i">{{ oneday }}</option>
         </b-form-select>  
-        <b-form-select v-model="selectedTeam">
+        <b-form-select class="selectMe" v-model="selectedTeam">
           <option>Select team</option>
           <option v-for="(team, i) in fixtBadge" :key="i">{{ team.name }}</option>
         </b-form-select>  
@@ -212,13 +212,8 @@ export default {
 .fixtures {
   background-color: rgb(245, 250, 220);
 }
-select {
-  height: 35px;
-  width: 120px;
-  border-radius: 10px;
-  font-stretch: extra-condensed;
-  padding-left: 15px;
-  margin: 15px 0px 25px 0px;
+.selectMe { 
+  width: 140px;
 }
 .timeContainer {
   display: flex;

@@ -12,13 +12,13 @@
       <div v-if="isLoading">
       <p>loading</p>
       </div>  
-      <div v-else>
-        <h5>Best Scorers</h5>
+      <div v-else><br>
+        <h3>BEST SCORERS</h3>
         <div id="scorersContainer">
           <b-carousel id="scorerCarousel" controls indicators:interval="4000" v-model="slide" @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
             <b-carousel-slide class="oneImage" v-for="(scorer, i) in allScorers" :key="i">
               <div class="sContainer">
-                <h4>{{ i + 1 }} {{ scorer.player.name }}</h4><br>
+                <h4>{{ i + 1 }} {{ scorer.player.name }}</h4>
                 <div class="sData">
                   <!-- <p>{{ scorer.player.position }}</p> -->
                   <p>{{ scorer.player.nationality }}</p>
@@ -35,12 +35,14 @@
               </div>  
             </b-carousel-slide>
           </b-carousel>
-          <p class="mt-4">
+          <!-- <p class="mt-4">
             Slide #: {{ slide }}<br>
             Sliding: {{ sliding }}
-          </p> 
+          </p>  -->
       </div>
     </div>
+    <div class="cover"></div>
+    <br>
 
     </div>     
     <!-- <div class="scrollMe">
@@ -194,19 +196,29 @@ iframe {
   padding: 10px;
   margin-top: 10px;
 }
+h4 {
+  padding-bottom: 30px;
+}
 #scorerCarousel {
   text-shadow: 1px 1px 2px #333;
   background-image: url("~@/assets/Ligue-1-blue.jpg");
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
-  height: 350px;
+  height: 310px;
 }
 .oneImage {
-  padding: 0px;
-  height: 350px;
+  padding-top: 0px;
+  height: 310px;
   width: 100%;
-  background-color: rgba(100, 100, 100, 0.9);
+  /* background-color: rgba(100, 100, 100, 0.9); */
+  background: -moz-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(137,137,137,0.9) 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(100,100,100,0.9)), color-stop(47%, rgba(146,146,146,0.95)), color-stop(100%, rgba(167,167,167,0.9)));
+background: -webkit-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
+background: -o-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
+background: -ms-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
+background: linear-gradient(135deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=1 );
 }
 .sContainer {
   position: relative;
@@ -219,7 +231,7 @@ iframe {
 }
 .sData {
   position: relative;
-  margin: 0px 0px -150px 60px;
+  margin: 0px 0px -170px 50px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -247,6 +259,13 @@ iframe {
 .badgePic {
   height: 40px;
   width: auto;
+}
+.cover {
+  position: relative;
+  margin-top: -40px;
+  height: 40px;
+  background-color: rgb(245, 250, 220);
+  border: 0px;
 }
 
 
