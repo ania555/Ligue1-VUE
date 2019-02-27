@@ -1,72 +1,49 @@
 <template>
   <div class="home">
-    <div id="homeContainer">
-      <br><br><br>
-      <img src="images/ball.png" alt="">
-      <br><br><br><br><br><br><br>
-    </div>
-    <div>
-      <iframe src="https://taghcountdown.909c.fr/small-en.html"></iframe>
-    </div> 
-    <div>
-      <div v-if="isLoading">
+ 
+    <div v-if="isLoading">
       <p>loading</p>
-      </div>  
-      <div v-else><br>
+    </div>  
+    <div v-else>
+      <div id="homeContainer">
+        <br>
+        <div>
+          <iframe id="timer" src="https://taghcountdown.909c.fr/small-en.html"></iframe>
+        </div><br>  
         <h3>BEST SCORERS</h3>
-        <div id="scorersContainer">
-          <b-carousel id="scorerCarousel" controls indicators:interval="4000" v-model="slide" @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
-            <b-carousel-slide class="oneImage" v-for="(scorer, i) in allScorers" :key="i">
-              <div class="sContainer">
-                <h4>{{ i + 1 }} {{ scorer.player.name }}</h4>
+      </div>
+      <div id="scorersContainer">
+        <b-carousel id="scorerCarousel" controls indicators:interval="4000" v-model="slide" @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
+          <b-carousel-slide class="oneImage" v-for="(scorer, i) in allScorers" :key="i">
+            <div class="sContainer">
+              <p class="ordNumbScor" v-bind:style='{ color: myBackground(scorer)}'>{{ i + 1 }}</p>
+              <p class="scorerName">{{ scorer.player.name }}</p>
+              <div class="oneScorerSet">
                 <div class="sData">
                   <!-- <p>{{ scorer.player.position }}</p> -->
-                  <p>{{ scorer.player.nationality }}</p>
+                  <div class="nationality">
+                    <p>{{ scorer.player.nationality }}</p>
+                    <span><img class="flag" :src="myFlag(scorer)"></span>
+                  </div>
                   <!-- <p>{{ scorer.player.shirtNumber }}</p> -->
                   <p>{{ myTeam(scorer) }}</p>
-                  <p class="myScore">{{ scorer.numberOfGoals }}</p>
-                </div>
+                  <p class="myScore">{{ scorer.numberOfGoals }} goals</p> 
+                </div>              
                 <img class="playerPic" :src="myPhoto(scorer)" alt="">
-                <div class="stripeBadge"  v-bind:style='{ backgroundColor: myBackground(scorer)}'>
-                  <div class="circleBadge">
-                    <img class="badgePic"  :src="myBadge(scorer)" alt="">
-                  </div>
+              </div>
+              <div class="stripeBadge"  v-bind:style='{ backgroundColor: myBackground(scorer)}'>
+                <div class="circleBadge">
+                  <img class="badgePic"  :src="myBadge(scorer)" alt="">
                 </div>
-              </div>  
-            </b-carousel-slide>
-          </b-carousel>
-          <!-- <p class="mt-4">
-            Slide #: {{ slide }}<br>
-            Sliding: {{ sliding }}
-          </p>  -->
-      </div>
+              </div>
+            </div>  
+          </b-carousel-slide>
+        </b-carousel>
     </div>
-    <div class="cover"></div>
-    <br>
-
-    </div>     
-    <!-- <div class="scrollMe">
-      <table>
-      <thead>
-      <tr>
-        <th></th>
-        <th class="fixHead2">head</th>
-        <th class="fixHead3">head</th>
-        <th class="FixHead4">head</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th>head</th>
-        <td class="fixColumn2" >bodytfdtdtfdfd</td>
-        <td class="fixColumn3">bodyzfdd</td>
-        <td class="fixColumn4">bodyfxfx</td>
-      </tr>
-
-      </tbody>
-      </table>
-    </div> -->
-    
+    <div class="cover"></div> 
+  </div>
+        
+   <!-- <img src="images/ball.png" alt=""> -->
   </div>
 </template>
 
@@ -87,16 +64,19 @@ export default {
       slide: 0,
       sliding: null,
       scorPhotos: [
-        {id: 3374, scorerPhoto: "images/Kylian-Mbappe.jpg"},
-        {id: 8705, scorerPhoto: "images/Emiliano-Sala.jpg"},
-        {id: 8412, scorerPhoto: "images/Nicolas-Pepe.jpg"},
-        {id: 3370, scorerPhoto: "images/Florian-Thauvin.jpg"},
-        {id: 8491, scorerPhoto: "images/Neymar-Jr.jpg"},
-        {id: 3170, scorerPhoto: "images/Edinson-Cavani.jpg"},
-        {id: 3598, scorerPhoto: "images/Wahbi-Khazri.jpg"},
-        {id: 1043, scorerPhoto: "images/Lebo-Mothiba.jpg"},
-        {id: 8547, scorerPhoto: "images/Jonathan-Bamba.jpg"},
-        {id: 8518, scorerPhoto: "images/Francois-Kamano.jpg"},
+        {id: 3374, scorerPhoto: "images/Kylian-Mbappe.jpg", nationality: "images/fra.png"},
+        {id: 8705, scorerPhoto: "images/Emiliano-Sala.jpg", nationality: "images/arg.png"},
+        {id: 8412, scorerPhoto: "images/Nicolas-Pepe.jpg", nationality: "images/ivo.png"},
+        {id: 3370, scorerPhoto: "images/Florian-Thauvin.jpg", nationality: "images/fra.png"},
+        {id: 8491, scorerPhoto: "images/Neymar-Jr.jpg", nationality: "images/bre.png"},
+        {id: 3170, scorerPhoto: "images/Edinson-Cavani.jpg", nationality: "images/uru.png"},
+        {id: 3598, scorerPhoto: "images/Wahbi-Khazri.jpg", nationality: "images/tun.png"},
+        {id: 1043, scorerPhoto: "images/Lebo-Mothiba.jpg", nationality: "images/saf.png"},
+        {id: 8547, scorerPhoto: "images/Jonathan-Bamba.jpg", nationality: "images/fra.png"},
+        {id: 8518, scorerPhoto: "images/Francois-Kamano.jpg", nationality: "images/gui.png"},
+        {id: 8311, scorerPhoto: "images/Max-Alain-Gradel.jpg", nationality: "images/ivo.png"},
+        {id: 8517, scorerPhoto: "images/Gaetan-Laborde.jpg", nationality: "images/fra.png"},
+        {id: 3739, scorerPhoto: "images/Radamel-Falcao.jpg", nationality: "images/col.png"}
       ],
     }
   },
@@ -161,6 +141,12 @@ export default {
         if(this.scorPhotos[i].id === item.player.id) 
         return this.scorPhotos[i].scorerPhoto;
       }
+    },
+    myFlag(item) {
+      for (let i = 0; i < this.scorPhotos.length; i++) {
+        if(this.scorPhotos[i].id === item.player.id) 
+        return this.scorPhotos[i].nationality;
+      }  
     }
   },
 }
@@ -173,21 +159,23 @@ export default {
   background-color: rgb(245, 250, 220);
 }
 #homeContainer {
-  /* background-image: url("~@/assets/french-flag.png"); */
-  background-image: url("~@/assets/france-fabrik.png");
+  background-image: url("~@/assets/french-flag.png");
+  /* background-image: url("~@/assets/france-fabrik.png"); */
   background-position: center;
-  background-repeat: repeat-y;
+  /* background-repeat: repeat-y; */
   background-size: cover;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 img {
-  height: 140px;
+  height: 50px;
   width: auto;
   position: relative;
   margin-bottom: 5px;
 }
-iframe {
+#timer {
   border:none;
   margin-left: 10px;
   background-color: rgb(170,170,170);
@@ -196,9 +184,31 @@ iframe {
   padding: 10px;
   margin-top: 10px;
 }
-h4 {
-  padding-bottom: 30px;
+h3 {
+  color: black;
+  font-weight: 600;
+  background-color: rgba(150,150,150,0.4);
+  width: 100%;
+  padding: 5px;
+  align-self: center;
 }
+#scorersContainer {
+  position: relative;
+  bottom: 10px;
+}
+.scorerName {
+  position: relative;
+  top: 63px;
+  font-size: 24px;
+}
+.ordNumbScor {
+  position: relative;
+  top: 130px;
+  right: 120px;
+  font-size: 42px;
+  font-weight: bold;
+}
+
 #scorerCarousel {
   text-shadow: 1px 1px 2px #333;
   background-image: url("~@/assets/Ligue-1-blue.jpg");
@@ -213,39 +223,38 @@ h4 {
   width: 100%;
   /* background-color: rgba(100, 100, 100, 0.9); */
   background: -moz-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(137,137,137,0.9) 100%);
-background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(100,100,100,0.9)), color-stop(47%, rgba(146,146,146,0.95)), color-stop(100%, rgba(167,167,167,0.9)));
-background: -webkit-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
-background: -o-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
-background: -ms-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
-background: linear-gradient(135deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=1 );
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(100,100,100,0.9)), color-stop(47%, rgba(146,146,146,0.95)), color-stop(100%, rgba(167,167,167,0.9)));
+  background: -webkit-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
+  background: -o-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
+  background: linear-gradient(135deg, rgba(100,100,100,0.9) 0%, rgba(146,146,146,0.9) 47%, rgba(167,167,167,0.9) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=1 );
 }
 .sContainer {
   position: relative;
   width: 143%;
   margin-left: -21.5%; 
 }
-.ordNumbScor {
-  position: relative;
-  margin: 0px 0px -30px -240px;
-}
 .sData {
   position: relative;
-  margin: 0px 0px -170px 50px;
+  top: 30px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
   align-items: flex-start;
-  width: 50%;
-}
-.myScore {
-  font-size: 32px;
 }
 .playerPic {
-  position: relative;
-  margin: 0px 0px -45px 140px;
   height: 200px;
   width: auto;
+}
+.oneScorerSet {
+  position: relative;
+  top: 50px;
+  left: 12%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 76%;
 }
 .stripeBadge {
   padding: 5px 0px 5px 35px;
@@ -262,59 +271,46 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 .cover {
   position: relative;
-  margin-top: -40px;
-  height: 40px;
-  background-color: rgb(245, 250, 220);
+  margin-top: -50px;
+  height: 70px;
+  background-image: url("~@/assets/french-flag.png");
+  background-position: center;
+  background-repeat: repeat-y;
+  background-size: cover;
+  width: 100%;
   border: 0px;
 }
 
-
-
-
-
-/* .scrollMe {
-  max-width: 100%;
-  max-height: 500px;
-  overflow: scroll;
+@media only screen and (orientation: landscape) {
+  .stripeBadge {
+  padding: 5px 0px 5px 150px;
+  }
+  .oneScorerSet {
   position: relative;
-}
-table {
+  top: 50px;
+  left: 27%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 47%;
+  }
+  .ordNumbScor {
   position: relative;
-  border-collapse: collapse;
+  top: 130px;
+  right: 145px;
+  font-size: 42px;
+  font-weight: bold;
+  }
 }
-td, th {
-  padding: 5px;
-  width: 50px;
-} */
-thead th {
-  position: -webkit-sticky; /* for Safari */
-  position: sticky;
-  top: 0;
-  background: #000;
-  color: #FFF;
+.flag {
+  height: 20px;
+  margin-left: 12px;
+  margin-top: 2px;
 }
-/* thead th:first-child {
-  left: 0;
-  z-index: 1;
-}
-.fixHead2 {
-  left: 47px;
-  z-index: 1;
-} */
-.fixColumn2 {
-  position: -webkit-sticky; /* for Safari */
-  position: sticky;
-  left: 47px;
-  background: #FFF;
-  border-right: 1px solid #CCC;
-}
-
-tbody th {
-  position: -webkit-sticky; /* for Safari */
-  position: sticky;
-  left: 0;
-  background: #FFF;
-  border-right: 1px solid #CCC;
+.nationality {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 </style>
