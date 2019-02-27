@@ -68,7 +68,7 @@ export default {
         {id: 8705, scorerPhoto: "images/Emiliano-Sala.jpg", nationality: "images/arg.png"},
         {id: 8412, scorerPhoto: "images/Nicolas-Pepe.jpg", nationality: "images/ivo.png"},
         {id: 3370, scorerPhoto: "images/Florian-Thauvin.jpg", nationality: "images/fra.png"},
-        {id: 8491, scorerPhoto: "images/Neymar-Jr.jpg", nationality: "images/bre.png"},
+        {id: 8491, scorerPhoto: "images/Neymar-Jr.jpg", nationality: "images/Brazil.png"},
         {id: 3170, scorerPhoto: "images/Edinson-Cavani.jpg", nationality: "images/uru.png"},
         {id: 3598, scorerPhoto: "images/Wahbi-Khazri.jpg", nationality: "images/tun.png"},
         {id: 1043, scorerPhoto: "images/Lebo-Mothiba.jpg", nationality: "images/saf.png"},
