@@ -302,6 +302,29 @@ h3 {
   font-weight: bold;
   }
 }
+
+@media only screen and (min-width: 380px) {
+  .stripeBadge {
+  padding: 5px 0px 5px 50px;
+  }
+  .oneScorerSet {
+  position: relative;
+  top: 50px;
+  left: 17%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 68%;
+  }
+  .ordNumbScor {
+  position: relative;
+  top: 130px;
+  right: 130px;
+  font-size: 42px;
+  font-weight: bold;
+  }
+}
+
 .flag {
   height: 20px;
   margin-left: 12px;
