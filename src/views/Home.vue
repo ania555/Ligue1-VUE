@@ -42,8 +42,6 @@
     </div>
     <div class="cover"></div> 
   </div>
-        
-   <!-- <img src="images/ball.png" alt=""> -->
   </div>
 </template>
 
@@ -76,7 +74,9 @@ export default {
         {id: 8518, scorerPhoto: "images/Francois-Kamano.jpg", nationality: "images/gui.png"},
         {id: 8311, scorerPhoto: "images/Max-Alain-Gradel.jpg", nationality: "images/ivo.png"},
         {id: 8517, scorerPhoto: "images/Gaetan-Laborde.jpg", nationality: "images/fra.png"},
-        {id: 3739, scorerPhoto: "images/Radamel-Falcao.jpg", nationality: "images/col.png"}
+        {id: 3739, scorerPhoto: "images/Radamel-Falcao.jpg", nationality: "images/col.png"},
+        {id: 8308, scorerPhoto: "images/Andy-Delort.jpg", nationality: "images/fra.png"},
+        {id: 15618, scorerPhoto: "images/Moussa-Dembele.jpg", nationality: "images/fra.png"},
       ],
     }
   },

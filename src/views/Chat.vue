@@ -31,15 +31,12 @@
               <p class="small">{{msg.email}}</p>
               <p class="small">{{msg.date}}</p>
               <p>{{msg.body}}</p>
-              <hr id="divider">
+              <hr class="divider">
             </div>
           </div>
         </b-col>  
       </b-row>
-      
-
-   </div>
-   
+    </div>
   </div>
 </template>
 
@@ -175,7 +172,7 @@ export default {
   overflow-y: scroll;
   height: 280px;
 }
-#divider {
+.divider {
   width: 50%;
   height: 5px;
 }

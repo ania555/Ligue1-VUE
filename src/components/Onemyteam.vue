@@ -10,8 +10,8 @@
               <div id="official" v-bind:style='{ backgroundColor: modalTeam.modalColor}' >
                 <a :href="myTeam(modalTeam)"><p id="webOf">Official Website</p></a> 
                 <div class="offArrow">
-                  <img id="arrow" src="images/arrow-icon.png">
-                  <img id="arrow" src="images/arrow-icon.png">
+                  <img class="arrow" src="images/arrow-icon.png">
+                  <img class="arrow" src="images/arrow-icon.png">
                 </div>
               </div>
             </div>
@@ -24,8 +24,8 @@
                   <p id="place">{{ modalTeam.venue }}</p>
                 </span>
                 <div class="downArrow">
-                  <img id="arrow" src="images/arrow-icon.png">
-                  <img id="arrow" src="images/arrow-icon.png">
+                  <img class="arrow" src="images/arrow-icon.png">
+                  <img class="arrow" src="images/arrow-icon.png">
                 </div>
               </div>
               <b-collapse id="collapseMap">
@@ -34,8 +34,8 @@
               <div id="contact" v-bind:style='{ backgroundColor: modalTeam.modalColor}' v-b-toggle="'collapseContact'">
                 <p>Contact</p>
                 <div class="contactArrow">
-                  <img id="arrow" src="images/arrow-icon.png">
-                  <img id="arrow" src="images/arrow-icon.png">
+                  <img class="arrow" src="images/arrow-icon.png">
+                  <img class="arrow" src="images/arrow-icon.png">
                 </div>
               </div>
               <b-collapse id="collapseContact">
@@ -160,7 +160,6 @@ iframe {
   padding: 0px 15px 0px 15px;
 }
 #official {
-  /* background-color: rgb(210,210,210); */
   width: 100%;
   height: 40px;
   padding: 10px;
@@ -173,7 +172,7 @@ iframe {
   text-decoration: none;
   font-size: 16px;
 }
-#arrow {
+.arrow {
   height: 20px;
   width: auto;
   margin: 10px -12px 0px 0px;
@@ -250,14 +249,14 @@ iframe {
   align-items: center;
 }
 .myBookModal {
-  position: fixed;  /*Stay in place */
+  position: fixed; 
   z-index: 1;  /*Sit on top */
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  width: 100%; 
+  height: 100%; 
   overflow: auto;                 
   /*  background-color: red; Fallback color */
   background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
@@ -268,11 +267,11 @@ iframe {
   align-items: center;
   background-color:rgb(120, 120, 120); 
   color:black;
-  margin: 2% auto; /* 15% from the top and centered */
+  margin: 2% auto; 
   padding: 0px;
   box-shadow: 2px 2px 20px 1px;
   height: 100%;
-  width: 97%; /* Could be more or less, depending on screen size */
+  width: 97%; 
 }
 /* The Close Button */
 .close {
